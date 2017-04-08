@@ -27,6 +27,20 @@
 			</feature>
 		</config-file>
 
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <provider
+        android:name="android.support.v4.content.FileProvider"
+        android:authorities="${applicationId}.ch.ti8m.fileProvider"
+        android:exported="false"
+        android:grantUriPermissions="true">
+        <meta-data
+          android:name="android.support.FILE_PROVIDER_PATHS"
+          android:resource="@xml/ch/ti8m/provider_paths.xml"/>
+      </provider>
+    </config-file>
+
+    <resource-file src="provider_paths.xml" target="res/xml/ch/ti8m/provider_paths.xml" />
+
     <source-file src="src/android/DocumentHandler.java" target-dir="src/ch/ti8m/phonegap/plugins" />
 
   </platform>

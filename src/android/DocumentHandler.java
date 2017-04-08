@@ -15,6 +15,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.BuildConfig;
+import android.support.v4.content.FileProvider;
 import android.webkit.CookieManager;
 import android.webkit.MimeTypeMap;
 
@@ -157,8 +159,9 @@ public class DocumentHandler extends CordovaPlugin {
 
 			// start an intent with the file
 			try {
+				Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".ch.ti8m.fileProvider", result);
 				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setDataAndType(Uri.fromFile(result), mimeType);
+				intent.setDataAndType(uri, mimeType);
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				context.startActivity(intent);
 
