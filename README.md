@@ -1,5 +1,10 @@
 # DocumentHandler
 
+
+forked from https://github.com/ti8m/DocumentHandler
+
+fix crash on android 7.0
+
 A PhoneGap plugin to handle documents (e.g. PDFs) loaded from a URL. 
 
 ## Usage
