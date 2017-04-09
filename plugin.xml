@@ -35,11 +35,11 @@
         android:grantUriPermissions="true">
         <meta-data
           android:name="android.support.FILE_PROVIDER_PATHS"
-          android:resource="@xml/ch.ti8m.provider_paths.xml"/>
+          android:resource="@xml/ch_ti8m_provider_paths"/>
       </provider>
     </config-file>
-
-    <resource-file src="provider_paths.xml" target="res/xml/ch.ti8m.provider_paths.xml" />
+    <framework src="com.android.support:support-v4:+" />
+    <resource-file src="provider_paths.xml" target="res/xml/ch_ti8m_provider_paths.xml" />
 
     <source-file src="src/android/DocumentHandler.java" target-dir="src/ch/ti8m/phonegap/plugins" />
 
