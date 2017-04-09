@@ -159,7 +159,7 @@ public class DocumentHandler extends CordovaPlugin {
 
 			// start an intent with the file
 			try {
-				Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".ch.ti8m.fileProvider", result);
+				Uri uri = Build.VERSION.SDK_INT >= 24 ? FileProvider.getUriForFile(context, context.getPackageName() + ".ch.ti8m.fileProvider", result) : Uri.fromFile(result);
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.setDataAndType(uri, mimeType);
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
