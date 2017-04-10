@@ -1,8 +1,13 @@
 package ch.ti8m.phonegap.plugins;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.support.v4.content.FileProvider;
+import android.webkit.CookieManager;
+import android.webkit.MimeTypeMap;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -10,15 +15,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.ActivityNotFoundException;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.support.v4.content.FileProvider;
-import android.webkit.CookieManager;
-import android.webkit.MimeTypeMap;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class DocumentHandler extends CordovaPlugin {
 
@@ -159,10 +162,13 @@ public class DocumentHandler extends CordovaPlugin {
 
 			// start an intent with the file
 			try {
-				Uri uri = Build.VERSION.SDK_INT >= 24 ? FileProvider.getUriForFile(context, context.getPackageName() + ".ch.ti8m.fileProvider", result) : Uri.fromFile(result);
+//				Uri uri = Build.VERSION.SDK_INT >= 24 ? FileProvider.getUriForFile(context, context.getPackageName() + ".ch.ti8m.fileProvider", result) : Uri.fromFile(result);
+				Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".ch.ti8m.fileProvider", result);
+
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.setDataAndType(uri, mimeType);
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 				context.startActivity(intent);
 
 				callbackContext.success(); // Thread-safe.
